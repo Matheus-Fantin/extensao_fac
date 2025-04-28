@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Atualiza o ano no footer
+   
     document.getElementById('current-year').textContent = new Date().getFullYear();
 
-    // Formatação do campo celular
+    
     const celularInput = document.getElementById('celular');
     if (celularInput) {
         celularInput.addEventListener('input', function(e) {
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Controle de arquivos do portfólio
+    
     const portfolioInput = document.getElementById('portfolio');
     if (portfolioInput) {
         // Atualiza contador de arquivos
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateFilePreview(files);
         });
 
-        // Preview de arquivos
+        
         function updateFilePreview(files) {
             const maxFiles = parseInt(portfolioInput.getAttribute('data-max-files')) || 5;
             const previewContainer = document.getElementById('preview-container');
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
-            // Remover arquivos do preview
+            
             previewContainer.addEventListener('click', function(e) {
                 if (e.target.classList.contains('remove-btn')) {
                     const fileName = e.target.getAttribute('data-name');
@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Validação e envio do formulário
+    
     const formArtista = document.getElementById('form-artista');
     if (formArtista) {
         formArtista.addEventListener('submit', function(e) {
@@ -129,13 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             }
 
-            // Mostra feedback visual durante o envio
+            
             const submitBtn = formArtista.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
             submitBtn.disabled = true;
 
-            // Envio via AJAX
+            
             const formData = new FormData(formArtista);
             
             fetch('salvar_artista.php', {
