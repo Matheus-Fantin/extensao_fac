@@ -1,31 +1,31 @@
 <?php
-// Adicione isto no TOPO do arquivo galeria.php
+
 header('Content-Type: text/html; charset=utf-8');
 
 include 'assets/conexao.php';
 
-// Configurações de paginação
+
 $pagina = isset($_GET['pagina']) ? intval($_GET['pagina']) : 1;
 $limite = 10;
 $offset = ($pagina - 1) * $limite;
 
-// Filtros
+
 $tipo_arte = isset($_GET['tipo_arte']) ? $_GET['tipo_arte'] : '';
 $busca = isset($_GET['busca']) ? trim($_GET['busca']) : '';
 
-// Query base com prepared statements
+
 $sql = "SELECT SQL_CALC_FOUND_ROWS * FROM artistas WHERE 1=1";
 $params = [];
 $types = '';
 
-// Adiciona filtro por tipo de arte
+
 if ($tipo_arte) {
     $sql .= " AND tipo_arte = ?";
     $params[] = $tipo_arte;
     $types .= 's';
 }
 
-// Adiciona filtro de busca
+
 if ($busca) {
     $sql .= " AND (nome LIKE ? OR email LIKE ? OR celular LIKE ?)";
     $params[] = "%$busca%";
@@ -34,13 +34,13 @@ if ($busca) {
     $types .= 'sss';
 }
 
-// Adiciona paginação
+
 $sql .= " LIMIT ? OFFSET ?";
 $params[] = $limite;
 $params[] = $offset;
 $types .= 'ii';
 
-// Prepara e executa a query
+
 $stmt = $conn->prepare($sql);
 if ($params) {
     $stmt->bind_param($types, ...$params);
